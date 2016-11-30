@@ -7,7 +7,7 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       if !item.special?
-        item.quality -= 1 if !item.has_min_quality?
+        item.quality -=1 if !item.has_min_quality?
 
       else
         if item.quality < 50
@@ -58,6 +58,7 @@ end
 
 class Item
   MIN_QUALITY = 0
+  MAX_QUALITY = 50
 
   attr_accessor :name, :sell_in, :quality
 
@@ -89,5 +90,9 @@ class Item
 
   def has_min_quality?
     @quality <= MIN_QUALITY
+  end
+
+  def has_max_quality?
+    @quality >= MAX_QUALITY
   end
 end
