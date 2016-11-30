@@ -65,4 +65,8 @@ class Item
   def to_s()
     "#{@name}, #{@sell_in}, #{@quality}"
   end
+
+  def aged_brie?
+    @name == "Aged Brie"
+  end
 end

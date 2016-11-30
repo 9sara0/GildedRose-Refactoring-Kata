@@ -9,5 +9,14 @@ describe GildedRose do
       expect(items[0].name).to eq "foo"
     end
   end
+end
 
+
+
+
+describe Item do
+  it "knows if its an 'Aged Brie'" do
+    item = Item.new(name="Aged Brie", sell_in=2, quality=0)
+    expect(item).to be_aged_brie
+  end
 end
