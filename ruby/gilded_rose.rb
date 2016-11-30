@@ -10,16 +10,16 @@ class GildedRose
         item.quality -=1 if !item.has_min_quality?
 
       else
-        if item.quality < 50
+        if !item.has_max_quality?
           item.quality += 1
           if item.backstage_passes?
             if item.sell_in < 11
-              if item.quality < 50
+              if !item.has_max_quality?
                 item.quality += 1
               end
             end
             if item.sell_in < 6
-              if item.quality < 50
+              if !item.has_max_quality?
                 item.quality += 1
               end
             end
@@ -45,7 +45,7 @@ class GildedRose
             item.quality -= item.quality
           end
         else
-          if item.quality < 50
+          if !item.has_max_quality?
             item.quality += 1
           end
         end
