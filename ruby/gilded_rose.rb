@@ -59,6 +59,8 @@ class GildedRose
 end
 
 class Item
+  MIN_QUALITY = 0
+
   attr_accessor :name, :sell_in, :quality
 
   def initialize(name, sell_in, quality)
@@ -87,4 +89,7 @@ class Item
     aged_brie? || backstage_passes? || sulfuras?
   end
 
+  def has_min_quality?
+    @quality <= MIN_QUALITY
+  end
 end

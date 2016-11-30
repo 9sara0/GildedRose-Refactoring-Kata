@@ -62,4 +62,16 @@ describe Item do
       expect(item).not_to be_special
     end
   end
+
+  describe "#has_min_quality?" do
+    it "knows if has MIN_QUALITY" do
+      item = Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=15, quality=Item::MIN_QUALITY)
+      expect(item).to have_min_quality
+    end
+
+    it "knows if its quality is above MIN_QUALITY" do
+      item = Item.new(name="Dexterity Vest", sell_in=2, quality=(Item::MIN_QUALITY + 1))
+      expect(item).not_to have_min_quality
+    end
+  end
 end
