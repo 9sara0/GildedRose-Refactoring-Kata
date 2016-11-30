@@ -8,15 +8,12 @@ class GildedRose
     @items.each do |item|
       if !item.special?
         item.quality -=1 if !item.has_min_quality?
-
       else
         if !item.has_max_quality?
           item.quality += 1
           if item.backstage_passes?
             if item.sell_in < 11
-              if !item.has_max_quality?
-                item.quality += 1
-              end
+              item.quality += 1 if !item.has_max_quality?
             end
             if item.sell_in < 6
               if !item.has_max_quality?
@@ -27,31 +24,21 @@ class GildedRose
         end
       end
 
-
-      if !item.sulfuras?
-        item.sell_in -= 1
-      end
-
+      item.sell_in -= 1 if !item.sulfuras?
 
       if item.sell_in < 0
-        if !item.aged_brie?
-          if !item.backstage_passes?
-            if !item.has_min_quality?
-              if !item.sulfuras?
-                item.quality -= 1
-              end
-            end
-          else
-            item.quality -= item.quality
-          end
-        else
-          if !item.has_max_quality?
-            item.quality += 1
-          end
+        if !item.special?
+          item.quality -= 1 if !item.has_min_quality?
         end
+
+        item.quality -= item.quality if item.backstage_passes?
+
+        if item.aged_brie?
+          item.quality += 1 if !item.has_max_quality?
+        end
+
+
       end
-
-
     end
   end
 end
