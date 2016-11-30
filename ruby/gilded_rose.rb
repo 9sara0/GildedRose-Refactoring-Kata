@@ -6,12 +6,11 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      if !item.aged_brie? and !item.backstage_passes?
+      if !item.special?
         if item.quality > 0
-          if !item.sulfuras?
-            item.quality = item.quality - 1
-          end
+          item.quality = item.quality - 1
         end
+
       else
         if item.quality < 50
           item.quality = item.quality + 1
@@ -29,9 +28,13 @@ class GildedRose
           end
         end
       end
+
+
       if !item.sulfuras?
         item.sell_in = item.sell_in - 1
       end
+
+
       if item.sell_in < 0
         if !item.aged_brie?
           if !item.backstage_passes?
@@ -49,6 +52,8 @@ class GildedRose
           end
         end
       end
+
+
     end
   end
 end
