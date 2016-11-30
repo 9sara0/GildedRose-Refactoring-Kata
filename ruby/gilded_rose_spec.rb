@@ -38,4 +38,16 @@ describe Item do
       expect(item).not_to be_backstage_passes
     end
   end
+
+  describe "#sulfuras?" do
+    it "knows if its a 'Sulfuras'" do
+      item = Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=15, quality=20)
+      expect(item).to be_sulfuras
+    end
+
+    it "knows if its not a 'Sulfuras'" do
+      item = Item.new(name="Dexterity Vest", sell_in=2, quality=1)
+      expect(item).not_to be_sulfuras
+    end
+  end
 end

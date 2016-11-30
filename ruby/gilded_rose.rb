@@ -73,4 +73,8 @@ class Item
   def backstage_passes?
     @name == "Backstage passes to a TAFKAL80ETC concert"
   end
+
+  def sulfuras?
+    @name == "Sulfuras, Hand of Ragnaros"
+  end
 end
