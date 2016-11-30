@@ -50,4 +50,16 @@ describe Item do
       expect(item).not_to be_sulfuras
     end
   end
+
+  describe "#special?" do
+    it "knows if its a 'Special Item': 'Aged Brie', 'Backstage passes' or 'Sulfuras'" do
+      item = Item.new(name="Sulfuras, Hand of Ragnaros", sell_in=15, quality=20)
+      expect(item).to be_special
+    end
+
+    it "knows if its not a 'Special'" do
+      item = Item.new(name="Dexterity Vest", sell_in=2, quality=1)
+      expect(item).not_to be_special
+    end
+  end
 end

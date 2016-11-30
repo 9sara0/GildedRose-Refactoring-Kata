@@ -77,4 +77,9 @@ class Item
   def sulfuras?
     @name == "Sulfuras, Hand of Ragnaros"
   end
+
+  def special?
+    aged_brie? || backstage_passes? || sulfuras?
+  end
+
 end
