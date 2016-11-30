@@ -7,9 +7,7 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       if !item.special?
-        if !item.has_min_quality?
-          item.quality -= 1
-        end
+        item.quality -= 1 if !item.has_min_quality?
 
       else
         if item.quality < 50
