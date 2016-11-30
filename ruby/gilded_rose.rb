@@ -6,47 +6,54 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      if !item.special?
-        item.quality -=1 if !item.has_min_quality?
+      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
+        if item.quality > 0
+          if item.name != "Sulfuras, Hand of Ragnaros"
+            item.quality = item.quality - 1
+          end
+        end
       else
-        if !item.has_max_quality?
-          item.quality += 1
-          if item.backstage_passes?
+        if item.quality < 50
+          item.quality = item.quality + 1
+          if item.name == "Backstage passes to a TAFKAL80ETC concert"
             if item.sell_in < 11
-              item.quality += 1 if !item.has_max_quality?
+              if item.quality < 50
+                item.quality = item.quality + 1
+              end
             end
             if item.sell_in < 6
-              if !item.has_max_quality?
-                item.quality += 1
+              if item.quality < 50
+                item.quality = item.quality + 1
               end
             end
           end
         end
       end
-
-      item.sell_in -= 1 if !item.sulfuras?
-
+      if item.name != "Sulfuras, Hand of Ragnaros"
+        item.sell_in = item.sell_in - 1
+      end
       if item.sell_in < 0
-        if !item.special?
-          item.quality -= 1 if !item.has_min_quality?
+        if item.name != "Aged Brie"
+          if item.name != "Backstage passes to a TAFKAL80ETC concert"
+            if item.quality > 0
+              if item.name != "Sulfuras, Hand of Ragnaros"
+                item.quality = item.quality - 1
+              end
+            end
+          else
+            item.quality = item.quality - item.quality
+          end
+        else
+          if item.quality < 50
+            item.quality = item.quality + 1
+          end
         end
-
-        item.quality -= item.quality if item.backstage_passes?
-
-        if item.aged_brie?
-          item.quality += 1 if !item.has_max_quality?
-        end
-
-
       end
     end
   end
 end
 
 class Item
-  MIN_QUALITY = 0
-  MAX_QUALITY = 50
-
   attr_accessor :name, :sell_in, :quality
 
   def initialize(name, sell_in, quality)
@@ -57,29 +64,5 @@ class Item
 
   def to_s()
     "#{@name}, #{@sell_in}, #{@quality}"
-  end
-
-  def aged_brie?
-    @name == "Aged Brie"
-  end
-
-  def backstage_passes?
-    @name == "Backstage passes to a TAFKAL80ETC concert"
-  end
-
-  def sulfuras?
-    @name == "Sulfuras, Hand of Ragnaros"
-  end
-
-  def special?
-    aged_brie? || backstage_passes? || sulfuras?
-  end
-
-  def has_min_quality?
-    @quality <= MIN_QUALITY
-  end
-
-  def has_max_quality?
-    @quality >= MAX_QUALITY
   end
 end
