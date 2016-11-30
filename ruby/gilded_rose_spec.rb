@@ -27,8 +27,15 @@ describe Item do
     end
   end
 
-  it "knows if its a 'Backstage passes'" do
-    item = Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20)
-    expect(item).to be_backstage_passes
+  describe "#backstage_passes?" do
+    it "knows if its a 'Backstage passes'" do
+      item = Item.new(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20)
+      expect(item).to be_backstage_passes
+    end
+
+    it "knows if its not a 'Backstage passes'" do
+      item = Item.new(name="Dexterity Vest", sell_in=2, quality=1)
+      expect(item).not_to be_backstage_passes
+    end
   end
 end

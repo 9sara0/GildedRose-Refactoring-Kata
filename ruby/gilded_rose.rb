@@ -69,4 +69,8 @@ class Item
   def aged_brie?
     @name == "Aged Brie"
   end
+
+  def backstage_passes?
+    @name == "Backstage passes to a TAFKAL80ETC concert"
+  end
 end
