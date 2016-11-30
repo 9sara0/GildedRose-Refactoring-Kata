@@ -7,7 +7,7 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       if !item.special?
-        if item.quality > 0
+        if !item.has_min_quality?
           item.quality -= 1
         end
 
@@ -38,7 +38,7 @@ class GildedRose
       if item.sell_in < 0
         if !item.aged_brie?
           if !item.backstage_passes?
-            if item.quality > 0
+            if !item.has_min_quality?
               if !item.sulfuras?
                 item.quality -= 1
               end
